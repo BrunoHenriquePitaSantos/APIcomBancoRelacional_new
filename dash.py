@@ -117,7 +117,7 @@ def graficos(df_selecionado):
     # Criacáo dos graficos
     # 4 abas -> Graficos de Barras, Graficos de linhas, Grafico de Pizza e Dispersao
 
-    graf1, graf2, graf3, graf4, graf5 = st.tabs(["Grafico de Barras", "Grafico de Linhas", "Grafico de Pizza", "Grafico de Dispersao","Grafico de Area"])
+    graf1, graf2, graf3, graf4, graf5, graf6 = st.tabs(["Grafico de Barras", "Grafico de Linhas", "Grafico de Pizza", "Grafico de Dispersao","Grafico de Area", "Grafico de linha"])
 
     with graf1:
         st.write("Grafico de Barras") # Titulo
@@ -180,11 +180,23 @@ def graficos(df_selecionado):
         st.write("Gráfico de Área")
         dados4 = df_selecionado.groupby("marca").count()[["valor"]].sort_values(by="valor", ascending=False).reset_index()
 
+
         fig_valores5 = px.area(dados4, x="marca", y="valor", title="Distribuição de Valores por Marca",
                   labels={"marca": "Marca", "valor": "Quantidade de Valores"})
 
    
         st.plotly_chart(fig_valores5, use_container_width=True)
+
+    with graf6:
+        st.write("Grafico de linha")    
+        dados5 = df_selecionado[["valor", "marca"]]
+
+        fig_valores6 = px.area(dados5,
+                               x=dados5.index,
+                               y="valor",
+                               title="Grafico de Linha"
+                               )
+        st.area_chart(fig_valores6)
    
      
 
